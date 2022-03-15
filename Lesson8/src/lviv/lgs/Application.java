@@ -7,6 +7,7 @@ import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
 public class Application {
     
 	static void menu() {
+		System.out.println();
 		System.out.println("ѕерев≥рити чи Ї такий м≥с€ць");
 		System.out.println("¬ивести вс≥ м≥с€ц≥ з такою ж порою року");
 		System.out.println(" ¬ивести вс≥ м≥с€ц≥ €к≥ мають таку саму к≥льк≥сть дн≥в");
@@ -21,7 +22,7 @@ public class Application {
 
 
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws WrongInputConsoleParametersException {
 		Monthes[] monthArr = Monthes.values();
 		Seasons[] seasonArr = Seasons.values();
 		Scanner season = new Scanner(System.in);
@@ -95,20 +96,31 @@ public class Application {
 
 			case "4": {
 
-				System.out.println("¬вести число : ");
-				season = new Scanner(System.in);
-				int mo = season.nextInt();
+				System.out.println("=== ѕрограмма вывода всех мес€цев с количеством дней меньше введенного ===");
+				System.out.println("¬ведите количество дней:");
+				int numberOfDays4 = season.nextInt();
 
 				boolean flag = false;
 
-				for (Monthes m : monthArr) {
-					if (m.getInDays() < mo) {
-						System.out.println(m);
+				for (Monthes months : monthArr) {
+					if (months.getInDays() == numberOfDays4 && numberOfDays4 >= 30) {
 						flag = true;
 					}
 				}
-				if (!flag) {
-					System.out.println("Ќе ≥снуЇ");
+
+				if (flag == true) {
+					System.out.println(" ≥льк≥сть дн≥в меньша " + numberOfDays4 + " в наступних м≥с€ц€х:");
+
+					for (Monthes months2 : monthArr) {
+						if (months2.getInDays() < numberOfDays4) {
+							System.out.println(months2);
+						}
+					}
+				}
+
+				if (flag == false) {
+					String message = "“аких м≥с€цев нема!";
+					throw new WrongInputConsoleParametersException(message);
 				}
 				break;
 				
